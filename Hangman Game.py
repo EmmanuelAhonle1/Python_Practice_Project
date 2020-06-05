@@ -13,6 +13,18 @@ import random #picks random item froom list
 import threading  #uses timer 
 
 
+def animate():
+    for timer in range(0, 6):
+        sys.stdout.write('\rYour game will begin shortly |')
+        time.sleep(0.1)
+        sys.stdout.write('\rYour game will begin shortly /')
+        time.sleep(0.1)
+        sys.stdout.write('\rYour game will begin shortly -')
+        time.sleep(0.1)
+        sys.stdout.write('\rYour game will begin shortly \\')
+        time.sleep(0.1)
+    sys.stdout.write('\r\n\n\n')
+
 loop = 0
 count = 0
 word = ''
@@ -331,10 +343,11 @@ for letters in range(0, len(split_chosen_word)):
 def check_letter_bank():
 	if user_input in letter_bank:
 		print("You have already used this letter.")
-		
-		
-print("\n\n\nThe game will start shortly")
-time.sleep(3)
+
+	
+animate()	
+
+print(word)
 print(guessed_word)
 
 while tries_left != 0:
