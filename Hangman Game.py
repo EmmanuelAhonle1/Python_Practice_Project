@@ -343,28 +343,36 @@ for letters in range(0, len(split_chosen_word)):
 
 #function checks if user's typed in letter matches list of chosen words and responds if you have already used this letter
 def check_letter_bank():
-	if user_input in letter_bank:
-		print("You have already used this letter.")
-
 	
+	if letter_bank.count(user_input) >= 1:
+		print("You have already used this letter.")
+		
+		
+correct = 0
+
+print("**TIP** You can type in 'check' to check the letters you've already used")	
 animate()	#calls animate function
 
-print(word)
+#print(word)
 print(guessed_word)
 
 while tries_left != 0: #conditions for if game is still continuing and there is not a game over
 		
 	while True:
+			
+		
+		
 			user_input = input('\nType in character OR guess the word: ')
 			time.sleep(1)
 			for position, letters in enumerate(split_chosen_word):
 				if letters == user_input:
 					guessed_word[position] = user_input
-					print("\nCongrats! '{}' occurs '{}' time(s)".format(user_input, letters_in_word(split_chosen_word, user_input)))
 					check_letter_bank()
-					letter_bank.append(user_input)
-					print(guessed_word)
+					correct += 1
+
 					
+			
+	
 					
 			#if the user guesses all the items in the list of characters from the random word, the code prints a message acknowledging correct word and exits terminal
 			if guessed_word == split_chosen_word:
@@ -379,16 +387,30 @@ while tries_left != 0: #conditions for if game is still continuing and there is 
 				print("Congrats!, the word was " + word)
 				exit()
 			
+			elif user_input == 'check':
+				print(letter_bank)
 			
 			#if user_input isn't found in list of the randomly picked word, then the program prints an error message and takes off a point in tries_left
 			elif split_chosen_word.count(user_input) == 0:
 				tries_left -= 1
 				print("\nOof! Wrong answer! You have '" + str(tries_left) + "' tries left")
-				print(guessed_word)
+				
 			
-		
-		
-		
+			if correct == 1:
+				
+				if user_input in letter_bank:
+					break
+					
+				elif user_input == 'check':
+					break
+				else:
+					letter_bank.append(user_input)
+					correct = 0
+					
+					
+			print("\n'{}' occurs '{}' time(s)".format(user_input, letters_in_word(split_chosen_word, user_input)))
+			print(guessed_word)
+
 		
 		
 		
