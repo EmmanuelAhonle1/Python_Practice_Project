@@ -407,8 +407,10 @@ while tries_left != 0: #conditions for if game is still continuing and there is 
 					letter_bank.append(user_input)
 					correct = 0
 					
-					
-			print("\n'{}' occurs '{}' time(s)".format(user_input, letters_in_word(split_chosen_word, user_input)))
+			for position, letters in enumerate(split_chosen_word):
+				if letters == user_input:		
+					print("\n'{}' occurs '{}' time(s)".format(user_input, letters_in_word(split_chosen_word, user_input)))
+					break
 			print(guessed_word)
 
 		
