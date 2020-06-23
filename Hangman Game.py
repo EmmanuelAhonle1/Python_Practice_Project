@@ -346,6 +346,8 @@ def check_letter_bank():
 	
 	if letter_bank.count(user_input) >= 1:
 		print("You have already used this letter.")
+		time.sleep(.5)
+
 		
 		
 correct = 0
@@ -353,7 +355,7 @@ correct = 0
 print("**TIP** You can type in 'check' to check the letters you've already used")	
 animate()	#calls animate function
 
-#print(word)
+print(word)
 print(guessed_word)
 
 while tries_left != 0: #conditions for if game is still continuing and there is not a game over
@@ -364,10 +366,11 @@ while tries_left != 0: #conditions for if game is still continuing and there is 
 		
 			user_input = input('\nType in character OR guess the word: ')
 			time.sleep(1)
+			check_letter_bank()
 			for position, letters in enumerate(split_chosen_word):
 				if letters == user_input:
 					guessed_word[position] = user_input
-					check_letter_bank()
+					#check_letter_bank()
 					correct += 1
 
 					
@@ -393,10 +396,12 @@ while tries_left != 0: #conditions for if game is still continuing and there is 
 			#if user_input isn't found in list of the randomly picked word, then the program prints an error message and takes off a point in tries_left
 			elif split_chosen_word.count(user_input) == 0:
 				tries_left -= 1
+				if user_input not in letter_bank:
+					letter_bank.append(user_input)
 				print("\nOof! Wrong answer! You have '" + str(tries_left) + "' tries left")
 				
 			
-			if correct == 1:
+			if correct > 0:
 				
 				if user_input in letter_bank:
 					break
@@ -409,7 +414,7 @@ while tries_left != 0: #conditions for if game is still continuing and there is 
 					
 			for position, letters in enumerate(split_chosen_word):
 				if letters == user_input:		
-					print("\n'{}' occurs '{}' time(s)".format(user_input, letters_in_word(split_chosen_word, user_input)))
+					print("\nCongrats! '{}' occurs '{}' time(s)".format(user_input, letters_in_word(split_chosen_word, user_input)))
 					break
 			print(guessed_word)
 
