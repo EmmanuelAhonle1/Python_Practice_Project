@@ -30,7 +30,7 @@ def play_again_prompt():
 	
 	cpu_wins = 0
 	player_wins = 0
-	play_again = input(f'Would you like to play again?([Y]es/[N]o)')
+	play_again = input(f'Would you like to play again?(Y/N):')
 	time.sleep(2)
 	if play_again in ['Y', 'y']:
 		print('SCORES HAVE BEEN RESET')
@@ -41,6 +41,10 @@ def play_again_prompt():
 		print(f'Thanks for playing! Hope you enjoyed it!')
 		time.sleep(1)
 		exit()
+		
+	else:
+		print(f'Please type an acceptable response.\n\n')
+		play_again_prompt()
 
 def check_winner():
 	
@@ -154,7 +158,6 @@ def play_game():
 			
 		check_winner()
 		cpu_choice = random.choice(cpu_choice_list)
-		print(cpu_choice)
 		player_choice = input(f"\n\nType 'Rock', 'Paper', or 'Scissors':   ").title()
 		
 		if player_choice not in cpu_choice_list:
@@ -167,8 +170,9 @@ def play_game():
 		player_chooses_rock()
 				
 		player_chooses_scissors()
-				
-		print(bold(f"\nPlayer wins: {player_wins}  |   CPU wins: {cpu_wins}").cs("red", "gold"))
+		
+		print('\n')
+		print(bold(f"Player wins: {player_wins}  |   CPU wins: {cpu_wins}").cs("red", "gold"))
 
 	
 play_game()
