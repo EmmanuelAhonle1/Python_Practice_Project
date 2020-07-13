@@ -28,9 +28,16 @@ def play_again_prompt():
 	global cpu_wins
 	global player_wins
 	
+	
+	
 	cpu_wins = 0
 	player_wins = 0
 	play_again = input(f'Would you like to play again?(Y/N):')
+	
+	
+	#ASSERTION to check if player input didn't process or was left blank to play the RPS Game again
+	assert len(play_again) != 0, 'User did not type in value'
+	
 	time.sleep(2)
 	if play_again in ['Y', 'y']:
 		print('SCORES HAVE BEEN RESET')
@@ -64,11 +71,8 @@ def check_winner():
 		
 		
 		
-def player_chooses_paper():
-	global player_choice
-	global cpu_choice
-	global cpu_wins
-	global player_wins
+def player_chooses_paper(player_choice, cpu_choice, cpu_wins, player_wins):
+	
 	
 	if player_choice.title() == 'Paper':
 		
@@ -162,6 +166,7 @@ def play_game():
 		
 		if player_choice not in cpu_choice_list:
 			print('Please type an acceptable response')
+
 			
 		time.sleep(1)
 		
@@ -175,5 +180,16 @@ def play_game():
 		print(bold(f"Player wins: {player_wins}  |   CPU wins: {cpu_wins}").cs("red", "gold"))
 
 	
-play_game()
+#play_game()
 	
+	
+#player_choice, cpu_choice, cpu_wins, player_wins
+
+def test_player_chooses_paper():
+	player_choice = 'Paper'
+	cpu_choice = 'Rock'
+	cpu_wins = 0
+	player_wins = 0
+	
+	player_chooses_paper(player_choice, cpu_choice, cpu_wins, player_wins)
+	assert player_wins == 1
